@@ -1,0 +1,26 @@
+{
+  "kind": "autosave-undo",
+  "data": {
+    "revision": 1,
+    "delay": 0,
+    "dropReply": false,
+    "order": [
+      "a",
+      "b"
+    ],
+    "rows": [
+      {
+        "id": "a",
+        "price": 12,
+        "quantity": 2,
+        "total": 24
+      },
+      {
+        "id": "b",
+        "price": 8,
+        "quantity": 3,
+        "total": 24
+      }
+    ]
+  }
+}

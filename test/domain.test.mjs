@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import * as domain from '../src/domain.mjs';
+const data=JSON.parse(await readFile(new URL('../fixtures/source.json',import.meta.url))).data;
+const {cellIdentity,preview}=domain;
+test('资料对象的领域边界和原始预览',async()=>{assert.equal(cellIdentity('a','price'),'a:price');
+assert.throws(()=>cellIdentity('a','missing'));
+assert.equal(preview(data)[0].total,24);});
