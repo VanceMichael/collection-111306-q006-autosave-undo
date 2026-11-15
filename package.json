@@ -9,8 +9,11 @@
   "scripts": {
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
     "build": "node scripts/check.mjs",
-    "demo": "node src/preview.mjs",
-    "start": "node src/serve.mjs"
+    "demo": "node src/preview.mjs && node src/demo-batch.mjs",
+    "demo:preview": "node src/preview.mjs",
+    "demo:batch": "node src/demo-batch.mjs",
+    "start": "node src/serve.mjs",
+    "console": "node src/console-serve.mjs"
   },
   "dependencies": {
     "playwright": "1.56.1"

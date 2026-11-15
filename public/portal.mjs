@@ -6,6 +6,8 @@ function render(){const body=document.querySelector('#rows');body.replaceChildre
    try{const response=await fetch('/api/edit',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id,column:input.dataset.column,value:Number(input.value)})});state=await response.json();render();document.querySelector('#save-status').textContent='已保存 '+state.revision;}catch{document.querySelector('#save-status').textContent='确认丢失';}
   });body.append(line);
  }
+ // 供同页面的接收器/机器人在页面上下文中只读核对当前 revision 与行数据；不改变门户交互
+ window.portalState=state;
 }
 document.querySelector('#sort').onclick=()=>{state.order.reverse();render();};render();
 window.portalReady=true;

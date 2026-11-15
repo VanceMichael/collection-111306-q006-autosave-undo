@@ -2,6 +2,9 @@
   "lost-reply": {
     "dropReply": true
   },
+  "normal-reply": {
+    "dropReply": false
+  },
   "delay": {
     "delay": 150
   },

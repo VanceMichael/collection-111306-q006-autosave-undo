@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>外协计价批次管理台</title>
+<style>
+ body { font-family: system-ui, sans-serif; margin: 1.5rem; color: #1f2933; }
+ h1 { font-size: 1.25rem; }
+ section { border: 1px solid #cbd2d9; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+ table { border-collapse: collapse; width: 100%; margin-top: .5rem; }
+ th, td { border: 1px solid #d9e2ec; padding: .35rem .5rem; text-align: left; font-size: .9rem; }
+ button { padding: .4rem .8rem; margin-right: .5rem; border-radius: 6px; border: 1px solid #627d98; background: #f0f4f8; cursor: pointer; }
+ button:disabled { opacity: .5; cursor: default; }
+ textarea { width: 100%; box-sizing: border-box; font-family: monospace; }
+ .confirmed { color: #14532d; } .unconfirmed { color: #b45309; font-weight: 600; }
+ .failed { color: #991b1b; } .conflict { color: #991b1b; font-weight: 700; }
+ .restored { color: #14532d; } .noop, .skipped { color: #52606d; }
+ #output { white-space: pre-wrap; background: #f5f7fa; padding: .75rem; border-radius: 6px; max-height: 22rem; overflow: auto; }
+ .hint { color: #52606d; font-size: .85rem; }
+</style>
+<body>
+<h1>外协计价批次管理台（可撤销录入）</h1>
+<p class="hint">机器人只通过门户可见页面录入，按业务 id 关联单元格；确认回包丢失不算成功也不算失败，撤回时别人改过的单元格会停下报冲突。</p>
+<section>
+ <strong>门户地址：</strong><span id="portal"></span>
+ <p><a href="/" id="portal-link" target="_blank">在新标签打开原门户预览（原有预览页面保持可用）</a></p>
+</section>
+<section>
+ <h2>1. 新建批次计划</h2>
+ <textarea id="plan" rows="6">[{"id":"a","column":"price","value":15},{"id":"b","column":"quantity","value":4}]</textarea>
+ <p><button id="btn-run">执行批次（遇到未确认写入即停）</button></p>
+ <p class="hint">也可对已存在批次续跑：<input id="continue-id" placeholder="批次 id"> <button id="btn-continue">继续该批次</button></p>
+</section>
+<section>
+ <h2>2. 已存批次</h2>
+ <button id="btn-refresh">刷新批次列表</button>
+ <table><thead><tr><th>批次</th><th>状态</th><th>已确认/未确认/失败</th><th>撤回</th><th>待人工</th><th>操作</th></tr></thead>
+ <tbody id="batch-rows"></tbody></table>
+</section>
+<section>
+ <h2>3. 批次详情与操作结果</h2>
+ <div id="output">尚未选择批次。</div>
+</section>
+<script type="module" src="/console.mjs"></script>
+</body>
+</html>
